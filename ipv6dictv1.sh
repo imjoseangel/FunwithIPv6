@@ -2,7 +2,8 @@
 
 for word in $(cat myhexdict.txt); do 
 
-wordexists=$(grep -e ^${word}$ /usr/share/dict/words)
+wordexists=$(aspell -d en dump master | aspell -l en expand | grep ^${word}$)
+
 
 if [ "$?" -eq "0" ]; then
     echo $word >> ipv6enwords.txt
