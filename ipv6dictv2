@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+for word in $(cat myhexdict_v2.txt); do 
+
+leetword=$(echo ${word} | sed 's/0/o/g; s/1/i/g; s/2/z/g; s/4/h/g; s/5/s/g; s/6/g/g; s/7/t/g; s/9/q/g;')
+
+
+wordexists=$(aspell -d en dump master | aspell -l en expand | grep -iv 'j\|k\|m\|n\|^o\|p\|r\|u\|v\|w\|x\|y' | grep ^${leetword}$)
+
+
+if [ "$?" -eq "0" ]; then
+    echo $word >> ipv6enwords_v2.txt
+fi
+
+done
